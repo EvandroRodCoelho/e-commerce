@@ -12,6 +12,8 @@ import {bootstrapCart4 , bootstrapSearch} from "@ng-icons/bootstrap-icons";
 import { BannerComponent } from './components/banner/banner.component';
 import { ProductIdComponent } from './page/product-id/product-id.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartComponent } from './page/cart/cart.component';
+import { DividerComponent } from './components/divider/divider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     BannerComponent,
     ProductIdComponent,
+    CartComponent,
+    DividerComponent,
   ],
   imports: [
     BrowserModule,
