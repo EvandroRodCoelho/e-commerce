@@ -9,7 +9,7 @@
   align-items: center;
   font-size: 24px;
   color: #ccc;
-  gap:5px;
+  gap: 5px;
 }
 
 .circle {
@@ -21,7 +21,7 @@
 }
 
 .navbar-right {
-  display:flex;
+  display: flex;
   gap: 20px;
   align-items: center;
 }
@@ -53,8 +53,7 @@
   background-color: #d9d9d901;
 }
 
-
-.navbar > .navbar-right  > .cart {
+.navbar > .navbar-right > .cart {
   width: 30px;
   height: 30px;
   background-color: #656565;
@@ -67,10 +66,10 @@
   cursor: pointer;
 }
 
-.navbar > .navbar-right  > .cart:hover {
+.navbar > .navbar-right > .cart:hover {
   opacity: 0.9;
 }
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
   .separator {
     display: none;
   }
@@ -83,10 +82,9 @@
     padding: 5px 15px;
   }
 
-  .navbar > .navbar-right  > .cart {
+  .navbar > .navbar-right > .cart {
     width: 25px;
     height: 25px;
-    font-size: 14px;
+    overflow: hidden;
   }
-
 }

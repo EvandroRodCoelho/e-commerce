@@ -1,0 +1,120 @@
+main {
+  padding: 30px 130px;
+}
+.main-product {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  gap: 8px;
+}
+
+main > .main-product > div {
+  flex: 1;
+  overflow: hidden;
+}
+ .main-product-divider {
+  width: 100%;
+  height: 2px;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+
+main  .main-product-count {
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  justify-content: left;
+  margin-bottom: 5px;
+}
+main  .main-product-count > p {
+  text-align: center;
+
+  margin-top: 3px;
+}
+main  .main-product-count > button {
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+
+  border: 0;
+  text-align: center;
+  background-color: #e5e5e5;
+}
+.main-product-brand {
+  margin-top: 8px;
+}
+.price {
+  font-size: 3em;
+  color: #656565;
+  overflow: hidden;
+}
+.product-brand {
+  font-size: 16px;
+  overflow: hidden;
+}
+
+.main-title, .main-product-brand {
+  background-color: #e5e5e5;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 25px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.add-cart {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: start;
+  gap:8px;
+  padding: 0 8px;
+  margin:16px 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.add-cart:hover {
+
+  opacity: 0.8;
+  background-color: #d9d9d9;
+
+}
+
+.cart {
+  font-size: 20px;
+  min-height: 40px;
+}
+.main-product-left > img {
+  width: 100%;
+  object-fit: cover;
+}
+/* Your existing CSS code */
+@media screen and (max-width: 768px) {
+  main {
+    padding: 10px 20px;
+  }
+
+  .main-product {
+    flex-direction: column;
+    margin: 0;
+  }
+  .main-product-left > img {
+    height: 170px;
+  }
+
+  .title {
+    font-size: 16px;
+   }
+}

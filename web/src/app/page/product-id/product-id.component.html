@@ -1,0 +1,64 @@
+<app-navbar>
+
+</app-navbar>
+
+<main>
+  <app-banner></app-banner>
+
+  <div class="main-product">
+    <div class="main-product-left">
+      <img src="../../../assets/img/product-img.png" alt="">
+    </div>
+
+    <div>
+      <div>
+        <div class="main-title">
+          <h2 class="title">Bolsa rosa Barbie</h2>
+        </div>
+
+        <div class="main-product-brand">
+          <h2 class="product-brand">
+            Marca do produto
+          </h2>
+        </div>
+      </div>
+
+
+
+      <div class="main-product-divider"></div>
+
+      <div class="main-right">
+        <div>
+          <h3 class="price">R$ 150,00</h3>
+        </div>
+        <div class="main-product-count">
+          <button>+</button>
+          <span>3</span>
+
+          <button>-</button>
+        </div>
+        <button class="add-cart button">
+          <ng-icon name="bootstrapCart4" class="cart"></ng-icon>
+          Adicionar no carrinho
+        </button>
+
+        <div>
+          <ngb-accordion #acc="ngbAccordion"
+          activeIds="ngb-panel-0" >
+              <ngb-panel title="Descrição do produto">
+              <ng-template ngbPanelContent>
+              Content1
+              </ng-template>
+              </ngb-panel>
+              <ngb-panel title="Ficha técnica do produto">
+              <ng-template ngbPanelContent >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At eos molestias non perferendis, itaque dolores! Veritatis nemo consectetur omnis. Labore libero similique cum adipisci esse laudantium distinctio repellendus autem eaque?
+              </ng-template>
+              </ngb-panel>
+        </ngb-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
