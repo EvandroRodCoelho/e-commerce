@@ -1,0 +1,12 @@
+.banner {
+  width: 100%;
+  max-width: 1600px;
+  background-color: #e5e5e5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+
+  font-weight: bold;
+}

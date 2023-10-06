@@ -8,7 +8,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './page/home/home.component';
 import { NgIconsModule } from '@ng-icons/core';
-import {bootstrapCart4} from "@ng-icons/bootstrap-icons"
+import {bootstrapCart4 , bootstrapSearch} from "@ng-icons/bootstrap-icons";
+import { BannerComponent } from './components/banner/banner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,11 +18,12 @@ import {bootstrapCart4} from "@ng-icons/bootstrap-icons"
     RegisterComponent,
     NavbarComponent,
     HomeComponent,
+    BannerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgIconsModule.withIcons({bootstrapCart4})
+    NgIconsModule.withIcons({bootstrapCart4,bootstrapSearch})
   ],
   providers: [],
   bootstrap: [AppComponent]
