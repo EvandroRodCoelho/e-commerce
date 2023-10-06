@@ -5,16 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './page/home/home.component';
+import { NgIconsModule } from '@ng-icons/core';
+import {bootstrapCart4} from "@ng-icons/bootstrap-icons"
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgIconsModule.withIcons({bootstrapCart4})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -86,6 +86,9 @@ input::placeholder {
   cursor: pointer;
 
   border: 0;
+  text-align: center;
+
+  background-color: #ebebeb;
 }
 
 
