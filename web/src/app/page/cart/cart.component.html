@@ -14,31 +14,28 @@
       <span>2 Itens</span>
 
       <div class="main-cart-products">
-        <div class="product-container">
+        <div class="product-container" *ngFor="let product of products">
           <div class="checkbox-container">
-            <input type="checkbox" name="" id="">
+            <input type="checkbox" (change)="checkboxChanged(product)" name="" id="">
           </div>
 
           <div class="product">
               <img   src="../../../assets/img/product-img.png" alt="product" />
-              <div>
-                <h2 class="name-product">Nome do Produto</h2>
-                <p>Marca do Produto</p>
+              <div class="information-product">
+                <h2 class="name-product">{{product.name}}</h2>
+                <p>{{product.brand}}</p>
                 <div class="main-product-count">
-                  <button>+</button>
-                  <span>3</span>
+                  <button (click)="increment(product)">+</button>
+                  <span>{{product.quantity}}</span>
 
-                  <button>-</button>
+                  <button (click)="decrement(product)">-</button>
                 </div>
               </div>
               <div class="information-product-price">
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                <p>R$ 120,00</p>
+                <p>R$ {{product.price.toFixed(2)}}</p>
               </div>
           </div>
-
-
-
         </div>
       </div>
 
@@ -52,10 +49,10 @@
       <div>
         <small>Valor total</small>
         <app-divider></app-divider>
-        <h3 class="price">R$ 150,00</h3>
+        <h3 class="price">R$ {{ calculateTotal().toFixed(2) }}</h3>
       </div>
 
-      <button class="finish-button">
+      <button class="finish-button " (click)="completePurchase()">
         Finalizar Pedido
       </button>
     </div>
