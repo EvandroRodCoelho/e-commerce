@@ -83,6 +83,7 @@ svg {
 .product-item h3 {
   font-size: 1.2em;
   margin: 0;
+  overflow: hidden;
 }
 
 .product-item p {

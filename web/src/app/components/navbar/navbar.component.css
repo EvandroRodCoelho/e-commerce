@@ -6,10 +6,11 @@
 }
 .separator {
   display: flex;
-  align-items: center;
+  align-items: first baseline;
   font-size: 24px;
   color: #ccc;
   gap: 5px;
+
 }
 
 .circle {
@@ -55,17 +56,24 @@
 
 .navbar > .navbar-right > .cart {
   width: 30px;
+  background-color: #656565;
   height: 30px;
   background-color: #656565;
   border-radius: 50%;
   display: flex;
-
+  font-size: 50%;
   align-items: center;
   justify-content: center;
   color: white;
   cursor: pointer;
+
+  overflow: hidden;
 }
 
+.navbar > .navbar-right > .cart > svg {
+  overflow: hidden;
+
+}
 .navbar > .navbar-right > .cart:hover {
   opacity: 0.9;
 }
