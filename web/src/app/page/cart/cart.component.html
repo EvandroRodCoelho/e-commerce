@@ -11,12 +11,12 @@
         Carrinho
       </h2>
 
-      <span>2 Itens</span>
+      <span>{{products.length}} itens</span>
 
       <div class="main-cart-products">
         <div class="product-container" *ngFor="let product of products">
           <div class="checkbox-container">
-            <input type="checkbox" (change)="checkboxChanged(product)" name="" id="">
+            <input type="checkbox" (change)="checkboxChanged(product)" name="" id="" [disabled]="product.quantity === 0">
           </div>
 
           <div class="product">
@@ -28,7 +28,7 @@
                   <button (click)="increment(product)">+</button>
                   <span>{{product.quantity}}</span>
 
-                  <button (click)="decrement(product)">-</button>
+                  <button (click)="decrement(product)" [disabled]="product.quantity === 1">-</button>
                 </div>
               </div>
               <div class="information-product-price">
