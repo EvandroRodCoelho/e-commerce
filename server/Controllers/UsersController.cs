@@ -1,8 +1,15 @@
 using Azure;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
+
+public class AuthenticationRequest
+{
+    public string login { get; set; }
+    public string password { get; set; }
+}
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
@@ -10,7 +17,6 @@ public class UsersController : ControllerBase
     private readonly ApplicationDbContext _dbContext;
 
     public UsersController(ApplicationDbContext dbContext) => _dbContext = dbContext;
-
     [HttpGet]
     public IActionResult GetUsers()
     {
@@ -88,26 +94,35 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
-    public IActionResult DeleteUser(int id)
+    [HttpPost("authenticate")]
+    public IActionResult Authenticate([FromBody] AuthenticationRequest request)
     {
         try
         {
-            var userToDelete = _dbContext.Users.FirstOrDefault(u => u.Id == id);
+            string login = request.login;
+            string password = request.password;
 
-            if (userToDelete == null)
+            var user = _dbContext.Users.FirstOrDefault(u => u.login == login);
+
+            if (user == null)
             {
-                return NotFound();
+                return NotFound(new { Message = "User not found" });
             }
 
-            _dbContext.Users.Remove(userToDelete);
-            _dbContext.SaveChanges();
+            if (user.password != password)
+            {
+                return Unauthorized(new { Message = "Incorrect password" });
+            }
 
-            return Ok();
+            return StatusCode(200, new { Message = "Authenticated successfully", User = user });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Erro ao excluir usuário: {ex.Message}");
+            return StatusCode(500, new { Message = $"Error authenticating user: {ex.Message}" });
         }
     }
+
+
+
+
 }

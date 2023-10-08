@@ -8,18 +8,26 @@
     </header>
     <div>
       <div class="form-input">
-        <input type="text"  placeholder="login">
-        <input type="password" placeholder="senha">
+        <input type="text" [(ngModel)]="login" name="login" placeholder="Login" (click)="onInputClick()">
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Senha" (click)="onInputClick()">
       </div>
 
       <div class="form-forgot-password">
         <a href="#">Esqueceu a senha?</a>
       </div>
 
+      <div *ngIf="showMessage">
+        <p>{{ message }}</p>
+      </div>
+
 
       <div class="form-buttons">
-        <button class="button"  type="submit">Entrar</button>
-        <button class="button" href="/register">Criar minha conta</button>
+        <button
+          class="button"
+          [disabled]="login.length == 0 || password.length == 0"
+          (click)="loginUser(login, password)"
+          type="submit">Entrar</button>
+        <a class="button" href="/register">Criar minha conta</a>
       </div>
     </div>
   </form>

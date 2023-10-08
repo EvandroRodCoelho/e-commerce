@@ -14,6 +14,8 @@ import { ProductIdComponent } from './page/product-id/product-id.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from './page/cart/cart.component';
 import { DividerComponent } from './components/divider/divider.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,9 @@ import { DividerComponent } from './components/divider/divider.component';
     BrowserModule,
     AppRoutingModule,
     NgIconsModule.withIcons({bootstrapCart4,bootstrapSearch}),
-    NgbModule
+    NgbModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
