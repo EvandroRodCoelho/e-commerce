@@ -1,20 +1,21 @@
 <div class="body">
-  <form>
+  <form (submit)="register()">
 
     <header>
       <img src="../../../assets/img/logo.png" alt="logo" />
     </header>
     <div>
       <div class="form-input">
-        <input type="text" placeholder="login" name="login">
-        <input type="password" placeholder="senha" name="senha">
-        <input type="password" placeholder="confirmar senha" name="confirmar_senha">
+        <input type="text" placeholder="login" name="login" [(ngModel)]="login">
+        <input type="password" placeholder="senha" name="senha" [(ngModel)]="password">
+        <input type="password" placeholder="confirmar senha" name="confirmar_senha" [(ngModel)]="confirmPassword">
       </div>
-
+      <div *ngIf="showMessage">
+        <p>{{ message }}</p>
+      </div>
       <div class="form-buttons">
         <button class="button" type="submit">Cadastrar</button>
       </div>
     </div>
   </form>
 </div>
-
