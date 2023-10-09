@@ -2,6 +2,7 @@ using System.Net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
@@ -17,7 +18,10 @@ builder.Services.AddCors(options =>
 });
 // Adicione a configuração do banco de dados ao projeto
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer("Server=EVANDRO\\SQLEXPRESS2023;Database=ecommerce;User Id=sa;Password=1234;TrustServerCertificate=True"));
+    options.UseSqlServer(
+        "Server=EVANDRO\\SQLEXPRESS2023;Database=ecommerce;User Id=sa;Password=1234;TrustServerCertificate=True",
+        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));
+
 
 builder.Services.AddControllers();
 
