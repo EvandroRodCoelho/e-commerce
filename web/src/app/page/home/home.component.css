@@ -54,7 +54,8 @@ svg {
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 30px; /* Espaçamento entre as linhas */
+
 
   padding: 50px;
 
@@ -65,9 +66,10 @@ svg {
 .product-item {
   border: 1px solid #ccc;
   padding: 10px;
-
+  margin-top: 15px;
   border-radius: 3px;
 }
+
 
 .product-item img {
   /* width: 100%; */
@@ -80,10 +82,13 @@ svg {
   background: #f4f8fb;
 }
 
-.product-item h3 {
+.product-item a {
   font-size: 1.2em;
   margin: 0;
   overflow: hidden;
+
+  font-weight: bold;
+  color: #3b3b3b;
 }
 
 .product-item p {
@@ -106,5 +111,9 @@ svg {
 
   .search input {
     margin-left: 5px;
+  }
+  .product-list {
+    align-items: center;
+    justify-content: center;
   }
 }
