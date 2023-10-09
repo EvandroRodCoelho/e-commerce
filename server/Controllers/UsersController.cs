@@ -22,14 +22,11 @@ public class UsersController : ControllerBase
     {
         try
         {
-            // Obtém todos os usuários do banco de dados
-
             return Ok(_dbContext.Users.ToList());
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message);
-            // return StatusCode(500, $"Erro ao obter usuários: {ex.Message}");
+            return StatusCode(500, $"Erro ao obter usuários: {ex.Message}");
         }
     }
 
