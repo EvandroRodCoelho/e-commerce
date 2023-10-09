@@ -32,10 +32,10 @@
           <h3 class="price">R$ 150,00</h3>
         </div>
         <div class="main-product-count">
-          <button>+</button>
-          <span>3</span>
+          <button (click)="decrement()" [disabled]="product.quantity === 1">-</button>
+          <span>{{currentQuantity}}</span>
 
-          <button>-</button>
+          <button (click)="increment()">+</button>
         </div>
         <button class="add-cart button">
           <ng-icon name="bootstrapCart4" class="cart"></ng-icon>

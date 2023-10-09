@@ -18,7 +18,7 @@ export class ProductIdComponent {
     quantity:0,
     technical_specification:''
   };
-
+  currentQuantity = 0;
   constructor(private route: ActivatedRoute,private router: Router) { }
 
   async ngOnInit() {
@@ -35,8 +35,18 @@ export class ProductIdComponent {
       this.router.navigate(['/']);
     }
     this.product = response.data;
-
     console.log(this.product);
   }
+  increment() {
+    if(this.currentQuantity < this.product.quantity) {
+      this.currentQuantity++;
+    }
 
+  }
+
+  decrement() {
+    if (this.currentQuantity > 0) {
+      this.currentQuantity--;
+    }
+  }
 }
