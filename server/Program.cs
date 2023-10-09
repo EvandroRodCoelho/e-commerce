@@ -19,8 +19,7 @@ builder.Services.AddCors(options =>
 // Adicione a configuração do banco de dados ao projeto
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
-        "Server=EVANDRO\\SQLEXPRESS2023;Database=ecommerce;User Id=sa;Password=1234;TrustServerCertificate=True",
-        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));
+        "Server=EVANDRO\\SQLEXPRESS2023;Database=ecommerce;User Id=sa;Password=1234;TrustServerCertificate=True"));
 
 
 builder.Services.AddControllers();
@@ -32,9 +31,8 @@ var app = builder.Build();
 //     app.UseSwagger();
 //     app.UseSwaggerUI();
 // }
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.UseCors(MyAllowSpecificOrigins);
 app.Run();
