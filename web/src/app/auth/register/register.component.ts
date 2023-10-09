@@ -63,4 +63,9 @@ export class RegisterComponent {
       }
     }
   }
+
+  ngOnInit() {
+    this.showMessage = false;
+    this.message = '';
+  }
 }
