@@ -17,7 +17,7 @@ export class LoginComponent {
   showMessage = false;
   message = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private router: Router) { }
   async loginUser(login: string, password: string) {
     if (!this.login || !this.password) {
       this.showMessage = true;
