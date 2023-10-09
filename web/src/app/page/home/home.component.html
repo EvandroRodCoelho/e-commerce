@@ -16,18 +16,13 @@
 
 
   <div class="product-list">
-    <div class="product-item">
+    <div class="product-item" *ngFor="let product of products">
       <img src="../../../assets/img/product-img.png" alt="Produto 1">
-      <span>R$ 50,00</span>
-      <p>Descrição do Produto</p>
-      <h3>Nome do Produto </h3>
+      <span>R$ {{ (product.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</span>
+      <p>{{product.description}}</p>
+      <a href='/product/{{ product.id }}'>{{ product.name }}</a>
+
     </div>
 
-    <div class="product-item">
-      <img src="../../../assets/img/product-img.png" alt="Produto 2">
-      <span>R$ 60,00</span>
-      <p>Descrição do Produto</p>
-      <h3>Nome do Produto</h3>
-    </div>
   </div>
 </main>

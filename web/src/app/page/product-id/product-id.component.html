@@ -13,12 +13,12 @@
     <div>
       <div>
         <div class="main-title">
-          <h2 class="title">Bolsa rosa Barbie</h2>
+          <h2 class="title">{{product.name}}</h2>
         </div>
 
         <div class="main-product-brand">
           <h2 class="product-brand">
-            Marca do produto
+            {{product.brand}}
           </h2>
         </div>
       </div>
@@ -47,12 +47,12 @@
           activeIds="ngb-panel-0" >
               <ngb-panel title="Descrição do produto">
               <ng-template ngbPanelContent>
-              Content1
+                {{product.description}}
               </ng-template>
               </ngb-panel>
               <ngb-panel title="Ficha técnica do produto">
               <ng-template ngbPanelContent >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At eos molestias non perferendis, itaque dolores! Veritatis nemo consectetur omnis. Labore libero similique cum adipisci esse laudantium distinctio repellendus autem eaque?
+                  {{product.technical_specification}}
               </ng-template>
               </ngb-panel>
         </ngb-accordion>
