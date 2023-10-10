@@ -2,9 +2,9 @@ export interface ProductsProps {
   id?:number;
   name: string;
   price: number;
-  description: string;
+  description?: string;
   quantity:number;
 
-  technical_specification:string;
-  brand:string;
+  technical_specification?:string;
+  brand?:string;
 }
