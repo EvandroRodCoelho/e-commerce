@@ -19,68 +19,54 @@ export class LoginComponent {
 
   constructor(private router: Router) { }
   async loginUser(login: string, password: string) {
-    if (!this.login || !this.password) {
-      this.showMessage = true;
-      this.message = 'Por favor, preencha ambos os campos.';
-      return;
-    }
+    localStorage.removeItem('user');
 
-    const userCredentials = { login, password };
     try {
-     const response = await axios.post('http://localhost:5126/api/users/authenticate', userCredentials);
+      if (!login || !password) {
+        this.showErrorMessage('Por favor, preencha ambos os campos.');
+        return;
+      }
 
-      console.log(response)
+      const userCredentials = { login, password };
+      const response = await axios.post('http://localhost:5126/api/users/authenticate', userCredentials);
 
-      if (response.status == 200 ) {
+      if (response.status == 200) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         this.router.navigate(['/']);
       } else {
-        this.showMessage = true;
-        this.message = 'Erro Inesperado, Tente novamente mais tarde';
-      }
-
-
-      if(response.status == 404) {
-        this.showMessage = true;
-        this.message = 'Usuário não encontrado';
-
-        return;
-      }
-      if(response.status == 401) {
-        this.showMessage = true;
-        this.message = 'senha incorreta';
-
-        return;
-      }
-      this.showMessage = true;
-      this.message = 'Erro Inesperado, Tente novamente mais tarde';
-
-    } catch (error) {
-
-
-        console.error('Erro na requisição:', error);
-        if ((error as AxiosError).response) {
-          const axiosError = error as AxiosError;
-          const response = axiosError.response as AxiosResponse;
-
-          if (response.status == 404) {
-            this.showMessage = true;
-            this.message = 'Usuário não encontrado';
-          }
-          if (response.status == 401) {
-            this.showMessage = true;
-            this.message = 'Senha incorreta';
-          }
-          if (response.status !== 404 && response.status !== 401) {
-            this.showMessage = true;
-            this.message = 'Erro Inesperado, Tente novamente mais tarde';
-          }
+        if (response.status == 404) {
+          this.showErrorMessage('Usuário não encontrado');
+        } else if (response.status == 401) {
+          this.showErrorMessage('Senha incorreta');
         } else {
-          console.error('Erro na requisição:', error);
-          this.showMessage = true;
-          this.message = 'Erro Inesperado, Tente novamente mais tarde';
+          this.showErrorMessage('Erro Inesperado, Tente novamente mais tarde');
         }
       }
+
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+
+      if ((error as AxiosError).response) {
+        const response = (error as AxiosError).response as AxiosResponse;
+
+        if (response.status == 404) {
+          this.showErrorMessage('Usuário não encontrado');
+        } else if (response.status == 401) {
+          this.showErrorMessage('Senha incorreta');
+        } else {
+          this.showErrorMessage('Erro Inesperado, Tente novamente mais tarde');
+        }
+      } else {
+        this.showErrorMessage('Erro Inesperado, Tente novamente mais tarde');
+      }
+    }
   }
+
+  private showErrorMessage(message: string) {
+    this.showMessage = true;
+    this.message = message;
+  }
+
 
   onInputClick() {
     this.showMessage = false;

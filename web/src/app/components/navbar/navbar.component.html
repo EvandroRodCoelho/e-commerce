@@ -10,10 +10,17 @@
     <a  href="/user/cart"  class="cart">
       <ng-icon name="bootstrapCart4"></ng-icon>
     </a>
-    <a class="nav-btn" href="/login">Entrar</a>
+    <span class="nav-btn" *ngIf="authenticated; else notAuthenticated">{{user?.login}}</span>
     <div class="separator">
       |
       <div class="circle"></div>
     </div>
   </div>
 </nav>
+
+<ng-template #notAuthenticated>
+  <a class="nav-btn" href="/login">
+    {{  'Entrar' }}
+  </a>
+
+</ng-template>

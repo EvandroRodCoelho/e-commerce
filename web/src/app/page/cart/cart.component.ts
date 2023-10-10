@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
 
  totalValue: number = 0;
 
-
+ authenticated: boolean = !!localStorage.getItem('user');
   @Output() countChanged = new EventEmitter<number>();
   products: Product[] = [
     { name: 'Product 1', price: 100, quantity: 10, brand:"Marca 1",selected:false },

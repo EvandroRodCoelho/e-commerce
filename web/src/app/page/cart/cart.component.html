@@ -5,7 +5,7 @@
 <main>
   <app-banner></app-banner>
 
-  <div class="cart">
+  <div class="cart"   *ngIf="authenticated; else notAuthenticated">
     <div class="main-cart">
       <h2>
         Carrinho
@@ -43,9 +43,6 @@
     </div>
     <div class="main-result">
       <h2>Resumo do Pedido</h2>
-
-
-
       <div>
         <small>Valor total</small>
         <app-divider></app-divider>
@@ -57,4 +54,12 @@
       </button>
     </div>
   </div>
+
+
+    <ng-template #notAuthenticated>
+      <div class="not-authenticated-message">
+        <p>Por favor, faça <a routerLink="/login">login</a> para acessar o carrinho.</p>
+      </div>
+    </ng-template>
+
 </main>
