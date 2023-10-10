@@ -8,6 +8,20 @@ public class ShoppingCartItemController : ControllerBase
 
     public ShoppingCartItemController(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
+    [HttpGet]
+    public IActionResult GetAllCartItems()
+    {
+        try
+        {
+            var allCartItems = _dbContext.ShoppingCartItems.ToList();
+            return Ok(allCartItems);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Erro ao obter todos os itens do carrinho: {ex.Message}");
+        }
+    }
+
     [HttpGet("{userId}")]
     public IActionResult GetCartItems(int userId)
     {
@@ -58,4 +72,5 @@ public class ShoppingCartItemController : ControllerBase
             return StatusCode(500, $"Erro ao remover item do carrinho: {ex.Message}");
         }
     }
+
 }
