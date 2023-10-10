@@ -49,4 +49,29 @@ export class ProductIdComponent {
       this.currentQuantity--;
     }
   }
+
+  async addToCart() {
+    const userObject = JSON.parse(localStorage.getItem('user') || 'null');
+
+    if(userObject === null) {
+        console.log("Usuário inválido");
+        return;
+    }
+
+    console.log("Usuário válido, adicione ao carrinho...");
+
+    try {
+        const response = await axios.post('http://localhost:5126/api/ShoppingCartItem/', {
+            userId: userObject.id,
+            productId: this.product.id,
+            quantity: this.currentQuantity
+        });
+
+        console.log("Produto adicionado ao carrinho com sucesso:", response.data);
+    } catch (error) {
+        console.error('Erro ao adicionar ao carrinho:', error);
+    }
+}
+
+
 }
