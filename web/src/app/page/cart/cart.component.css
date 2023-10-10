@@ -10,11 +10,10 @@ main > .cart {
 .main-cart {
   border: 1px solid #dedede;
   padding: 30px;
-}
-
-main > .cart > div {
   flex: 1;
 }
+
+
 
 main .main-product-count {
   display: flex;
@@ -26,9 +25,9 @@ main .main-product-count {
   margin-bottom: 5px;
 }
 
-main .main-product-count > p {
+main .main-product-count > span {
   text-align: center;
-  font-size: 6px;
+  font-size: 16px;
   margin-top: 3px;
 }
 
@@ -40,6 +39,8 @@ main .main-product-count > button {
   border: 0;
   text-align: center;
   background-color: #e5e5e5;
+
+  font-size:14px;
 }
 
 .product-container {
@@ -81,6 +82,9 @@ main .main-product-count > button {
   width: 100%;
 }
 
+.product > img {
+  width: 30%;
+}
 .product > .information-product {
   flex: 1;
   align-items: start;
@@ -90,7 +94,7 @@ main .main-product-count > button {
 .main-result {
   border: 1px solid #dedede;
   padding: 30px;
-  flex: 0.5;
+  width: 40%;
 }
 
 .finish-button {
@@ -124,8 +128,13 @@ small {
 h2 {
   overflow: hidden;
 }
+.finish-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-@media screen and (max-width: 926px) {
+
+@media screen and (max-width: 1100px) {
   main {
     padding: 10px 20px;
   }
@@ -138,7 +147,9 @@ h2 {
   .main-cart {
     padding: 20px;
   }
-
+  .main-result {
+    width: 100%;
+  }
   .main-product-count {
     justify-content: center;
     margin-bottom: 10px;
