@@ -45,3 +45,21 @@ VALUES
     ('Produto3', 'Descrição do Produto 3', 15, 40.0, 'Marca C', 'Especificações C'),
     ('Produto4', 'Descrição do Produto 4', 25, 20.0, 'Marca D', 'Especificações D'),
     ('Produto5', 'Descrição do Produto 5', 30, 10.0, 'Marca E', 'Especificações E');
+
+
+CREATE TABLE ShoppingCartItems
+(
+    Id INT PRIMARY KEY IDENTITY,
+    UserId INT NOT NULL,
+    ProductId INT NOT NULL,
+    Quantity INT NOT NULL,
+    CONSTRAINT FK_ShoppingCartItems_Users FOREIGN KEY (UserId) REFERENCES Users(Id),
+    CONSTRAINT FK_ShoppingCartItems_Products FOREIGN KEY (ProductId) REFERENCES Products(Id)
+);
+
+INSERT INTO ShoppingCartItems
+    (UserId, ProductId, Quantity)
+VALUES
+    (1, 1, 3),
+    (1, 1, 2),
+    (2, 2, 1);
