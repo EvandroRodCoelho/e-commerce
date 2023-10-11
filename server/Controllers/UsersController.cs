@@ -1,19 +1,5 @@
-using Azure;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 
-
-public class AuthenticationRequest
-{
-    public string login { get; set; }
-    public string password { get; set; }
-}
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
@@ -100,8 +86,8 @@ public class UsersController : ControllerBase
     {
         try
         {
-            string login = request.login;
-            string password = request.password;
+            string login = request.Login;
+            string password = request.Password;
 
             var user = _dbContext.Users.FirstOrDefault(u => u.login == login);
 
