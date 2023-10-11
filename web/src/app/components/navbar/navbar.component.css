@@ -49,9 +49,13 @@
   background-color: #ebebeb;
 }
 
+.nav-btn > a {
+  color: #000;
+}
 .navbar-right > .nav-btn {
   opacity: 0.8;
   background-color: #d9d9d901;
+  overflow: hidden;
 }
 
 .navbar > .navbar-right > .cart {
@@ -61,7 +65,7 @@
   background-color: #656565;
   border-radius: 50%;
   display: flex;
-  font-size: 50%;
+  font-size: 12px;
   align-items: center;
   justify-content: center;
   color: white;

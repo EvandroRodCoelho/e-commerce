@@ -8,7 +8,6 @@ import { RegisterComponent } from './auth/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './page/home/home.component';
 import { NgIconsModule } from '@ng-icons/core';
-import {bootstrapCart4 , bootstrapSearch} from "@ng-icons/bootstrap-icons";
 import { BannerComponent } from './components/banner/banner.component';
 import { ProductIdComponent } from './page/product-id/product-id.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +30,6 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgIconsModule.withIcons({bootstrapCart4,bootstrapSearch}),
     NgbModule,
     FormsModule,
     HttpClientModule

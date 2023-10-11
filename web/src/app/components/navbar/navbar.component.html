@@ -1,14 +1,14 @@
 <nav class="navbar">
   <div class="navbar-left">
     <div class="nav-btn">
-      <span>Logotipo</span>
+      <a href="/">Logotipo</a>
     </div>
   </div>
 
 
   <div class="navbar-right" >
     <a  href="/user/cart"  class="cart">
-      <ng-icon name="bootstrapCart4"></ng-icon>
+      <i class="fa-solid fa-cart-shopping"></i>
     </a>
     <span class="nav-btn" *ngIf="authenticated; else notAuthenticated">{{user?.login}}</span>
     <div class="separator">
