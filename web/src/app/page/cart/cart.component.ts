@@ -2,14 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import axios, { AxiosResponse } from 'axios';
 import { CartGetResponse } from 'src/types/CartGetResponse';
 import { CartProduct } from 'src/types/CartProduct';
+import { ProductsProps } from 'src/types/Products';
 import { User } from 'src/types/User';
-interface Product {
-  name: string;
-  price: number;
-  quantity: number;
-  brand: string;
-  selected: boolean;
-}
 
 @Component({
   selector: 'app-cart',
@@ -17,89 +11,98 @@ interface Product {
   styleUrls: ['./cart.component.css']
 })
 
-
 export class CartComponent implements OnInit {
   count: number = 0;
-
   totalValue: number = 0;
-
   authenticated: boolean = !!localStorage.getItem('user');
-
   userString = localStorage.getItem('user');
   user: User | null = this.userString ? JSON.parse(this.userString) : null;
 
   @Output() countChanged = new EventEmitter<number>();
   CartProduct: CartProduct[] = [];
-  cartList:CartGetResponse[] = [];
+  cartList: CartGetResponse[] = [];
+  selectedProducts: CartProduct[] = [];
+  total: number = 0;
 
   calculateTotal(): number {
-    let total = 0;
-    for (const product of this.CartProduct) {
-      total += product.product.price * product.quantityOnCart;
-    }
+    const total = this.selectedProducts.reduce((accumulator, product) => {
+      console.log(product);
+      return accumulator + (product.product.price * product.quantityOnCart);
+    }, 0);
+
     return total;
   }
 
-  increment(product:CartProduct ) {
-    product.quantityOnCart++;
+  increment(product: CartProduct) {
+    if (product.quantityOnCart < product.product.quantity) {
+      product.quantityOnCart++;
+      this.total = this.calculateTotal();
+    }
   }
 
   decrement(product: CartProduct) {
     if (product.quantityOnCart > 0) {
       product.quantityOnCart--;
+      this.total = this.calculateTotal();
     }
   }
-  checkboxChanged(product: CartProduct) {
 
+  checkboxChanged(product: CartProduct) {
     if (product.quantityOnCart !== 0) {
       product.selected = !product.selected;
     }
+
+    this.selectedProducts = this.CartProduct.filter(product => product.selected);
+
+    this.total = this.calculateTotal();
   }
 
-  completePurchase() {
-    const selectedProducts = this.CartProduct.filter(product => product.selected);
-    console.log("ola")
+  async completePurchase() {
+    this.selectedProducts = this.CartProduct.filter(product => product.selected);
 
-    console.log(selectedProducts);
+    if (this.selectedProducts.length <= 0) {
+      alert("Selecione os produtos");
+      return;
+    }
+
+    this.selectedProducts.forEach(async selectedProduct => {
+      const response = await axios.post(`http://localhost:5126/api/orderItem/`, {
+        TotalPrice: selectedProduct.quantityOnCart * selectedProduct.product.price,
+        ShoppingCartItemId: selectedProduct.cartId
+      });
+      console.log(response.data);
+    });
   }
+
   async getProductsOnCart() {
     const response = await axios.get(`http://localhost:5126/api/ShoppingCartItem/${this.user?.id}`);
 
-
     this.cartList = response.data;
 
-
-
-    this.cartList.forEach(async product => {
+    this.cartList.forEach(async (product, index) => {
       const responseProduct = await axios.get(`http://localhost:5126/api/products/${product.productId}`);
 
-      const responseProductData: Product = responseProduct.data;
+      const responseProductData: ProductsProps = responseProduct.data;
 
-      this.CartProduct.push({ product:{
-        brand: responseProductData.brand,
-        name: responseProductData.name,
-        price: responseProductData.price,
-        quantity: responseProductData.quantity
-      },
-      quantityOnCart:product.quantity,
-      selected:false
+      this.CartProduct.push({
+        product: {
+          brand: responseProductData.brand,
+          name: responseProductData.name,
+          price: responseProductData.price,
+          quantity: responseProductData.quantity
+        },
+        quantityOnCart: product.quantity,
+        selected: false,
+        cartId: this.cartList[index].id
       });
     });
-
-
-
-
   }
 
   async ngOnInit() {
-
-
-    if(this.authenticated) {
+    if (this.authenticated) {
       await this.getProductsOnCart();
     }
 
     this.calculateTotal();
-
-    console.log(this.CartProduct)
   }
 }

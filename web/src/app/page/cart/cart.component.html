@@ -11,7 +11,7 @@
         <div class="main-cart-products">
           <div class="product-container" *ngFor="let cartProduct of CartProduct">
             <div class="checkbox-container">
-              <input type="checkbox" (change)="checkboxChanged(cartProduct)" name="" id="" [disabled]="cartProduct.product.quantity === 0">
+              <input type="checkbox" (change)="checkboxChanged(cartProduct)" name="" id=""    [disabled]="cartProduct.quantityOnCart == 0">
             </div>
 
             <div class="product">
@@ -20,7 +20,7 @@
                 <h2 class="name-product">{{ cartProduct.product.name }}</h2>
                 <p>{{ cartProduct.product.brand }}</p>
                 <div class="main-product-count">
-                  <button (click)="increment(cartProduct)">+</button>
+                  <button (click)="increment(cartProduct)" [disabled]="cartProduct.quantityOnCart >= cartProduct.product.quantity">+</button>
                   <span class="quantity">{{ cartProduct.quantityOnCart }}</span>
                   <button (click)="decrement(cartProduct)" [disabled]="cartProduct.quantityOnCart === 1">-</button>
                 </div>

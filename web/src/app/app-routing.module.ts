@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { CartComponent } from './page/cart/cart.component';
 import { HomeComponent } from './page/home/home.component';
 import { ProductIdComponent } from './page/product-id/product-id.component';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), FormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
