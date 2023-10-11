@@ -58,6 +58,10 @@ export class ProductIdComponent {
         return;
     }
 
+    if(this.currentQuantity <= 0) {
+      alert("Selecione a quantidade");
+      return;
+    }
     console.log("Usuário válido, adicione ao carrinho...");
 
     try {
