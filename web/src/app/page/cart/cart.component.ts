@@ -65,13 +65,24 @@ export class CartComponent implements OnInit {
       return;
     }
 
-    this.selectedProducts.forEach(async selectedProduct => {
-      const response = await axios.post(`http://localhost:5126/api/orderItem/`, {
-        TotalPrice: selectedProduct.quantityOnCart * selectedProduct.product.price,
-        ShoppingCartItemId: selectedProduct.cartId
+    try {
+      this.selectedProducts.forEach(async selectedProduct => {
+      if(selectedProduct.quantityOnCart > selectedProduct.product.quantity) {
+        alert(`produto ${selectedProduct.product.name} quantidade superior ao estoque:`);
+        return;
+      }
+        const response = await axios.post(`http://localhost:5126/api/orderItem/`, {
+          TotalPrice: selectedProduct.quantityOnCart * selectedProduct.product.price,
+          ShoppingCartItemId: selectedProduct.cartId
+        });
+        console.log(response.data);
       });
-      console.log(response.data);
-    });
+
+      location.reload();
+    } catch (error) {
+      alert("Erro ao completar a compra");
+    }
+
   }
 
   async getProductsOnCart() {
