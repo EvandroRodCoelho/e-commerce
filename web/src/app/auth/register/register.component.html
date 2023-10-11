@@ -6,9 +6,9 @@
     </header>
     <div>
       <div class="form-input">
-        <input type="text" placeholder="login" name="login" [(ngModel)]="login">
-        <input type="password" placeholder="senha" name="senha" [(ngModel)]="password">
-        <input type="password" placeholder="confirmar senha" name="confirmar_senha" [(ngModel)]="confirmPassword">
+        <input type="text" placeholder="login" name="login" [(ngModel)]="login" (click)="onInputClick()">
+        <input type="password" placeholder="senha" name="senha" [(ngModel)]="password" (click)="onInputClick()">
+        <input type="password" placeholder="confirmar senha" name="confirmar_senha" [(ngModel)]="confirmPassword" (click)="onInputClick()">
       </div>
       <div *ngIf="showMessage">
         <p>{{ message }}</p>

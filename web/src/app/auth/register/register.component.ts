@@ -66,6 +66,10 @@ export class RegisterComponent {
     }
   }
 
+  onInputClick() {
+    this.showMessage = false;
+    this.message = '';
+  }
   ngOnInit() {
     this.showMessage = false;
     this.message = '';
