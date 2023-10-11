@@ -105,4 +105,20 @@ export class CartComponent implements OnInit {
 
     this.calculateTotal();
   }
+
+
+  async deleteCart(id:number) {
+    try {
+      const response = await axios.delete(`http://localhost:5126/api/ShoppingCartItem/${id}`);
+
+      if(response.status == 204 || response.status == 200) {
+        location.reload();
+      }
+
+    } catch (error) {
+      alert("erro ao deletar o produto")
+    }
+
+
+  }
 }

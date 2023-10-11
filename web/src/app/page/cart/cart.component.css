@@ -74,7 +74,15 @@ main .main-product-count > button {
   align-items: center;
   padding: 30px;
 }
-
+.information-product-price  > button {
+  background-color: transparent;
+  border: 0;
+  transition:all 0.5;
+}
+.information-product-price  > button:hover > svg,
+.information-product-price  > button:hover > p  {
+  color: red;
+}
 .product {
   display: flex;
   border: 1px solid #dedede;
