@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
@@ -10,14 +11,14 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  title='login';
+  title='Login';
   login='';
   password='';
 
   showMessage = false;
   message = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private titleService:Title) { }
   async loginUser(login: string, password: string) {
     localStorage.removeItem('user');
 
@@ -77,5 +78,6 @@ export class LoginComponent {
   ngOnInit() {
     this.showMessage = false;
     this.message = '';
+    this.titleService.setTitle(this.title)
   }
 }

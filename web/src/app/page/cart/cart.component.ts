@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import axios from 'axios';
 import { getUserDataFromLocalStorage } from 'src/app/utils/getUserOnlocalStorage';
 import { CartGetResponse } from 'src/types/CartGetResponse';
@@ -26,6 +27,7 @@ export class CartComponent implements OnInit {
   selectedProducts: CartProduct[] = [];
   total: number = 0;
 
+  constructor(private titleService:Title){};
   calculateTotal(): number {
     const total = this.selectedProducts.reduce((accumulator, product) => {
       console.log(product);
@@ -113,14 +115,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
-    if (this.authenticated) {
-      await this.getProductsOnCart();
-    }
-
-    this.calculateTotal();
-  }
-
 
   async deleteCart(id:number) {
     try {
@@ -133,7 +127,15 @@ export class CartComponent implements OnInit {
     } catch (error) {
       alert("erro ao deletar o produto")
     }
-
-
   }
+
+  async ngOnInit() {
+    if (this.authenticated) {
+      await this.getProductsOnCart();
+    }
+
+    this.calculateTotal();
+    this.titleService.setTitle("Cart")
+  }
+
 }

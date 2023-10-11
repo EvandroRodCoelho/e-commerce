@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import axios from 'axios';
 import { ProductsProps } from 'src/types/Products';
 
@@ -10,7 +11,8 @@ import { ProductsProps } from 'src/types/Products';
 export class HomeComponent {
   products:ProductsProps[] = [];
   searchTerm: string = '';
-
+  title= 'Home';
+  constructor(private titleService:Title) {}
   async getProducts() {
     const response = await axios.get("http://localhost:5126/api/products");
 
@@ -35,6 +37,7 @@ export class HomeComponent {
     );
   }
   ngOnInit() {
-    this.getProducts()
+    this.getProducts();
+    this.titleService.setTitle(this.title);
   }
 }

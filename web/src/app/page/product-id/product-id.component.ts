@@ -3,6 +3,7 @@ import { ProductsProps } from 'src/types/Products';
 import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
 import { getUserDataFromLocalStorage } from 'src/app/utils/getUserOnlocalStorage';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-product-id',
   templateUrl: './product-id.component.html',
@@ -20,7 +21,9 @@ export class ProductIdComponent {
     technical_specification:''
   };
   currentQuantity = 0;
-  constructor(private route: ActivatedRoute,private router: Router) { }
+
+  title ='';
+  constructor(private route: ActivatedRoute,private router: Router,private titleService:Title) { }
 
   async ngOnInit() {
     const idParam = this.route.snapshot.paramMap.get("id");
@@ -37,6 +40,8 @@ export class ProductIdComponent {
     }
     this.product = response.data;
     console.log(this.product);
+    this.title = this.product.name;
+    this.titleService.setTitle(this.title);
   }
   increment() {
     if(this.currentQuantity < this.product.quantity) {

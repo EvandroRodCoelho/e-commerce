@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
@@ -16,7 +17,8 @@ export class RegisterComponent {
   showMessage=false;
   message = '';
 
-  constructor (private router: Router){}
+  title = "Register";
+  constructor (private router: Router,private titleService:Title){}
 
   async register() {
     if (!this.login || !this.password || !this.confirmPassword) {
@@ -67,5 +69,6 @@ export class RegisterComponent {
   ngOnInit() {
     this.showMessage = false;
     this.message = '';
+    this.titleService.setTitle("register");
   }
 }
