@@ -15,6 +15,7 @@ import { CartComponent } from './page/cart/cart.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LogotipoComponent } from './components/logotipo/logotipo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProductIdComponent,
     CartComponent,
     DividerComponent,
+    LogotipoComponent,
   ],
   imports: [
     BrowserModule,
