@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   cartList: CartGetResponse[] = [];
   selectedProducts: CartProduct[] = [];
   total: number = 0;
-
+  error = false;
   constructor(private titleService:Title){};
   calculateTotal(): number {
     const total = this.selectedProducts.reduce((accumulator, product) => {
@@ -86,13 +86,16 @@ export class CartComponent implements OnInit {
 
       location.reload();
     } catch (error) {
+      error = true;
       alert("Erro ao completar a compra");
     }
 
   }
 
   async getProductsOnCart() {
-    const response = await axios.get(`http://localhost:5126/api/ShoppingCartItem/${this.user?.id}`);
+
+    try {
+      const response = await axios.get(`http://localhost:5126/api/ShoppingCartItem/${this.user?.id}`);
 
     this.cartList = response.data;
 
@@ -113,9 +116,11 @@ export class CartComponent implements OnInit {
         cartId: this.cartList[index].id
       });
     });
+    } catch (error) {
+      alert("Erro ao finalizar compra")
+    }
+
   }
-
-
   async deleteCart(id:number) {
     try {
       const response = await axios.delete(`http://localhost:5126/api/ShoppingCartItem/${id}`);
