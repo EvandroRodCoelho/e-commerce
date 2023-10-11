@@ -71,8 +71,10 @@ export class CartComponent implements OnInit {
         alert(`produto ${selectedProduct.product.name} quantidade superior ao estoque:`);
         return;
       }
+
+      const totalPrice = (selectedProduct.quantityOnCart * selectedProduct.product.price).toFixed(2);
         const response = await axios.post(`http://localhost:5126/api/orderItem/`, {
-          TotalPrice: selectedProduct.quantityOnCart * selectedProduct.product.price,
+          TotalPrice: totalPrice,
           ShoppingCartItemId: selectedProduct.cartId
         });
         console.log(response.data);
