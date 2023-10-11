@@ -22,16 +22,32 @@ public class OrderItemController : Controller
         {
             Console.Write(order);
             order.CreatedAt = DateTime.Now;
-            _dbContext.OrderItem.Add(order);
-
             var itemInCart = await _dbContext.ShoppingCartItems.FirstOrDefaultAsync(item => item.Id == order.ShoppingCartItemId);
+
             if (itemInCart != null)
             {
-                _dbContext.ShoppingCartItems.Remove(itemInCart);
-            }
+                var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == itemInCart.ProductId);
 
-            await _dbContext.SaveChangesAsync();
-            return Ok(order);
+                if (product != null && itemInCart.Quantity <= product.quantity)
+                {
+                    _dbContext.OrderItem.Add(order);
+
+                    product.quantity -= itemInCart.Quantity;
+
+                    _dbContext.ShoppingCartItems.Remove(itemInCart);
+
+                    await _dbContext.SaveChangesAsync();
+                    return Ok(order);
+                }
+                else
+                {
+                    return BadRequest("Quantidade no carrinho é maior que a quantidade em estoque");
+                }
+            }
+            else
+            {
+                return BadRequest("Item no carrinho não encontrado");
+            }
         }
         catch (Exception ex)
         {
@@ -41,10 +57,10 @@ public class OrderItemController : Controller
                 Console.WriteLine(ex.InnerException.Message);
             }
 
-            return StatusCode(500, order);
+            return StatusCode(500, ex.Message);
         }
-
     }
+
 
     [HttpDelete]
     public async Task<IActionResult> DeleteOrder(int orderId)
@@ -72,5 +88,4 @@ public class OrderItemController : Controller
             return StatusCode(500, ex.Message);
         }
     }
-
 }
