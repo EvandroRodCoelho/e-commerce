@@ -73,8 +73,8 @@ public class ProductsController : ControllerBase
                 return NotFound();
             }
 
-            existingProduct.name = updatedProduct.name; // Update other properties as needed
-            // ...
+            existingProduct.name = updatedProduct.name;
+
 
             _dbContext.SaveChanges();
 

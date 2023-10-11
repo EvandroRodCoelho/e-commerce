@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod();
     });
 });
-// Adicione a configuração do banco de dados ao projeto
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         "Data Source=EVANDRO;Initial Catalog=ecommerce;Integrated Security=True;;TrustServerCertificate=True"));

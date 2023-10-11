@@ -35,7 +35,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Id == id); // Obtém um usuário pelo ID
+            var user = _dbContext.Users.FirstOrDefault(u => u.Id == id);
 
             if (user == null)
             {
@@ -78,7 +78,7 @@ public class UsersController : ControllerBase
                 return NotFound();
             }
 
-            existingUser.login = updatedUser.login; // Atualiza as propriedades conforme necessário
+            existingUser.login = updatedUser.login;
             // ...
 
             _dbContext.SaveChanges();
