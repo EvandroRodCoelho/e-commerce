@@ -63,3 +63,22 @@ VALUES
     (1, 1, 3),
     (1, 1, 2),
     (2, 2, 1);
+
+CREATE TABLE ShoppingCartItem
+(
+    Id INT PRIMARY KEY,
+    UserId INT NOT NULL,
+    ProductId INT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (ProductId) REFERENCES Products(Id)
+);
+
+CREATE TABLE OrderItem
+(
+    Id INT PRIMARY KEY,
+    CreatedAt DATETIME NOT NULL,
+    TotalPrice FLOAT NOT NULL,
+    ShoppingCartItemId INT NOT NULL,
+    FOREIGN KEY (ShoppingCartItemId) REFERENCES ShoppingCartItem(Id)
+);
