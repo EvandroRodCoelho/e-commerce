@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsProps } from 'src/types/Products';
 import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
+import { getUserDataFromLocalStorage } from 'src/app/utils/getUserOnlocalStorage';
 @Component({
   selector: 'app-product-id',
   templateUrl: './product-id.component.html',
@@ -51,7 +52,7 @@ export class ProductIdComponent {
   }
 
   async addToCart() {
-    const userObject = JSON.parse(localStorage.getItem('user') || 'null');
+    const userObject = getUserDataFromLocalStorage();
 
     if(userObject === null) {
         console.log("Usuário inválido");

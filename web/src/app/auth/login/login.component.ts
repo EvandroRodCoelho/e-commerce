@@ -31,7 +31,9 @@ export class LoginComponent {
       const response = await axios.post('http://localhost:5126/api/users/authenticate', userCredentials);
 
       if (response.status == 200) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        console.log(response.data)
+        const localStorageData = { user:response.data.user, token:response.data.token}
+        localStorage.setItem('user', JSON.stringify(localStorageData));
         this.router.navigate(['/']);
       } else {
         if (response.status == 404) {

@@ -1,9 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
+import { getUserDataFromLocalStorage } from 'src/app/utils/getUserOnlocalStorage';
 import { CartGetResponse } from 'src/types/CartGetResponse';
 import { CartProduct } from 'src/types/CartProduct';
 import { ProductsProps } from 'src/types/Products';
 import { User } from 'src/types/User';
+import { UserLocalStorageData } from 'src/types/UserLocaStorage';
 
 @Component({
   selector: 'app-cart',
@@ -15,8 +17,8 @@ export class CartComponent implements OnInit {
   count: number = 0;
   totalValue: number = 0;
   authenticated: boolean = !!localStorage.getItem('user');
-  userString = localStorage.getItem('user');
-  user: User | null = this.userString ? JSON.parse(this.userString) : null;
+
+  user: User | null = getUserDataFromLocalStorage();
 
   @Output() countChanged = new EventEmitter<number>();
   CartProduct: CartProduct[] = [];
