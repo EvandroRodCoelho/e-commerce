@@ -1,7 +1,9 @@
 using System.Net;
-using Microsoft.AspNetCore.Hosting;
+using System.Text;
+using ecommerce;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -16,13 +18,24 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod();
     });
 });
-
+// Adicione a configuração do banco de dados ao projeto
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         "Data Source=EVANDRO;Initial Catalog=ecommerce;Integrated Security=True;;TrustServerCertificate=True"));
 
 
 builder.Services.AddControllers();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Settings.Secret))
+        };
+    });
 
 var app = builder.Build();
 

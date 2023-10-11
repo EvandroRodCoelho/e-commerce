@@ -1,8 +1,12 @@
 using Azure;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 
 
 public class AuthenticationRequest
@@ -110,16 +114,13 @@ public class UsersController : ControllerBase
             {
                 return Unauthorized(new { Message = "Incorrect password" });
             }
+            var token = TokenService.GenerateJwtToken(user.login);
 
-            return StatusCode(200, new { Message = "Authenticated successfully", User = user });
+            return StatusCode(200, new { Message = "Authenticated successfully", User = user, token });
         }
         catch (Exception ex)
         {
             return StatusCode(500, new { Message = $"Error authenticating user: {ex.Message}" });
         }
     }
-
-
-
-
 }
