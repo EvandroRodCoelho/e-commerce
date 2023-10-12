@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
 import { getUserDataFromLocalStorage } from 'src/app/utils/getUserOnlocalStorage';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-product-id',
   templateUrl: './product-id.component.html',
@@ -33,7 +34,7 @@ export class ProductIdComponent {
       this.router.navigate(['/']);
     }
 
-    const response = await  axios.get(`http://localhost:5126/api/products/${this.product.id}`);
+    const response = await  axios.get(`${environment.apiUrl}/products/${this.product.id}`);
 
     if(!response.data) {
       this.router.navigate(['/']);
@@ -71,7 +72,7 @@ export class ProductIdComponent {
     console.log("Usuário válido, adicione ao carrinho...");
 
     try {
-        const response = await axios.post('http://localhost:5126/api/ShoppingCartItem/', {
+        const response = await axios.post(`${environment.apiUrl}/ShoppingCartItem`, {
             userId: userObject.id,
             productId: this.product.id,
             quantity: this.currentQuantity

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class LoginComponent {
       }
 
       const userCredentials = { login, password };
-      const response = await axios.post('http://localhost:5126/api/users/authenticate', userCredentials);
+      const response = await axios.post(`${environment.apiUrl}/users/authenticate`, userCredentials);
 
       if (response.status == 200) {
         console.log(response.data)

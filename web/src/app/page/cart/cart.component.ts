@@ -2,11 +2,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import axios from 'axios';
 import { getUserDataFromLocalStorage } from 'src/app/utils/getUserOnlocalStorage';
+import { environment } from 'src/environments/environment';
 import { CartGetResponse } from 'src/types/CartGetResponse';
 import { CartProduct } from 'src/types/CartProduct';
 import { ProductsProps } from 'src/types/Products';
 import { User } from 'src/types/User';
-import { UserLocalStorageData } from 'src/types/UserLocaStorage';
+
 
 @Component({
   selector: 'app-cart',
@@ -77,7 +78,7 @@ export class CartComponent implements OnInit {
       }
 
       const totalPrice = (selectedProduct.quantityOnCart * selectedProduct.product.price).toFixed(2);
-        const response = await axios.post(`http://localhost:5126/api/orderItem/`, {
+        const response = await axios.post(`${environment.apiUrl}/orderItem/`, {
           TotalPrice: totalPrice,
           ShoppingCartItemId: selectedProduct.cartId
         });
@@ -95,12 +96,12 @@ export class CartComponent implements OnInit {
   async getProductsOnCart() {
 
     try {
-      const response = await axios.get(`http://localhost:5126/api/ShoppingCartItem/${this.user?.id}`);
+      const response = await axios.get(`${environment.apiUrl}/ShoppingCartItem/${this.user?.id}`);
 
     this.cartList = response.data;
 
     this.cartList.forEach(async (product, index) => {
-      const responseProduct = await axios.get(`http://localhost:5126/api/products/${product.productId}`);
+      const responseProduct = await axios.get(`${environment.apiUrl}/products/${product.productId}`);
 
       const responseProductData: ProductsProps = responseProduct.data;
 
@@ -123,7 +124,7 @@ export class CartComponent implements OnInit {
   }
   async deleteCart(id:number) {
     try {
-      const response = await axios.delete(`http://localhost:5126/api/ShoppingCartItem/${id}`);
+      const response = await axios.delete(`${environment.apiUrl}/ShoppingCartItem/${id}`);
 
       if(response.status == 204 || response.status == 200) {
         location.reload();

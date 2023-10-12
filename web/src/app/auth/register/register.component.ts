@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class RegisterComponent {
 
     const userCredentials = { login: this.login, password: this.password };
     try {
-      const response = await axios.post('http://localhost:5126/api/users', userCredentials);
+      const response = await axios.post(`${environment.apiUrl}/users`, userCredentials);
 
       if (response.status === 201) {
         this.showMessage = true;

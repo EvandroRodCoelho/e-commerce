@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import axios from 'axios';
+import { environment } from 'src/environments/environment';
 import { ProductsProps } from 'src/types/Products';
 
 @Component({
@@ -14,7 +15,7 @@ export class HomeComponent {
   title= 'Home';
   constructor(private titleService:Title) {}
   async getProducts() {
-    const response = await axios.get("http://localhost:5126/api/products");
+    const response = await axios.get(`${environment.apiUrl}/products`);
 
     console.log(response)
     this.products = response.data;
@@ -39,5 +40,6 @@ export class HomeComponent {
   ngOnInit() {
     this.getProducts();
     this.titleService.setTitle(this.title);
+    console.log(environment.apiUrl);
   }
 }
