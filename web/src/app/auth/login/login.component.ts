@@ -22,13 +22,11 @@ export class LoginComponent {
   constructor(private router: Router, private titleService:Title) { }
   async loginUser(login: string, password: string) {
     localStorage.removeItem('user');
-
+    if (!login || !password) {
+      this.showErrorMessage('Por favor, preencha ambos os campos.');
+      return;
+    }
     try {
-      if (!login || !password) {
-        this.showErrorMessage('Por favor, preencha ambos os campos.');
-        return;
-      }
-
       const userCredentials = { login, password };
       const response = await axios.post(`${environment.apiUrl}/users/authenticate`, userCredentials);
 
@@ -69,6 +67,8 @@ export class LoginComponent {
   private showErrorMessage(message: string) {
     this.showMessage = true;
     this.message = message;
+
+    console.log(this.message);
   }
 
 
