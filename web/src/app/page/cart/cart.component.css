@@ -163,14 +163,9 @@ h2 {
     margin-bottom: 10px;
   }
 
-  .main-product-count > button {
-    font-size: 14px;
-  }
-
   .information-product-price {
     padding: 20px;
   }
-
   .product {
     align-items: center;
     text-align: center;
@@ -181,3 +176,28 @@ h2 {
   }
 }
 
+@media screen and (max-width: 426px) {
+  .checkbox-container {
+    margin-right: 5px;
+  }
+  .main-cart {
+    flex-direction: column;
+    font-size: 10px;
+  }
+  .name-product {
+    font-size: 12px;
+  }
+  .information-product-price {
+    padding: 0;
+    justify-content: center;
+    height: 100%;
+    margin-right: 5px;
+  }
+  .information-product-price >button > p {
+    display: none;
+  }
+  main .main-product-count button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
