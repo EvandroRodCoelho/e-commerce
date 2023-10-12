@@ -61,8 +61,9 @@ export class ProductIdComponent {
     const userObject = getUserDataFromLocalStorage();
 
     if(userObject === null) {
-        console.log("Usuário inválido");
-        return;
+      this.router.navigate(['/login']);
+      console.log("Usuário inválido");
+      return;
     }
 
     if(this.currentQuantity <= 0) {
